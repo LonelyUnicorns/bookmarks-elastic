@@ -1,0 +1,25 @@
+version: "2"
+services:
+  rabbitmq:
+    image: "rabbitmq:3.7.4-rc.4-management"
+    hostname: "rabbitmq"
+    environment:
+      RABBITMQ_ERLANG_COOKIE: "${RABBITMQ_ERLANG_COOKIE}"
+      RABBITMQ_DEFAULT_USER: "${RABBITMQ_DEFAULT_USER}"
+      RABBITMQ_DEFAULT_PASS: "${RABBITMQ_DEFAULT_PASS}"
+      RABBITMQ_DEFAULT_VHOST: "${RABBITMQ_DEFAULT_VHOST}"
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+
+  elastic:
+    image: "elasticsearch"
+    environment:
+      - cluster.name=addition
+      - bootstrap.memory_lock=true
+    ports:
+      - 9200:9200
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
