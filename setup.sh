@@ -16,7 +16,7 @@ if ! file_exists .env ; then
 	mv .env.example .env
 fi
 
-source .env
+export $(cat .env)
 
 sudo docker-compose down
 sudo docker-compose kill
